@@ -148,6 +148,7 @@ formatters_words = {
     "kebab": formatters_dict["DASH_SEPARATED"],
     "packed": formatters_dict["DOUBLE_COLON_SEPARATED"],
     "allcaps": formatters_dict["ALL_CAPS"],
+    "screaming": formatters_dict["ALL_CAPS"],
     "alldown": formatters_dict["ALL_LOWERCASE"],
     "dubstring": formatters_dict["DOUBLE_QUOTED_STRING"],
     "string": formatters_dict["SINGLE_QUOTED_STRING"],
@@ -206,8 +207,16 @@ class Actions:
         global last_phrase
         return FormatText(last_phrase, formatters)
 
+    def formatted_str(s: str, formatters: str) -> str:
+        """Formats a phrase according to formatters.
 
-@ctx.capture(rule="{self.formatters}+")
+        formatters is a comma-separated string of formatters
+        (e.g. 'CAPITALIZE_ALL_WORDS,DOUBLE_QUOTED_STRING')
+        """
+        return format_text_helper(s.split(' '), formatters)
+
+
+@ctx.capture(rule='{self.formatters}+')
 def formatters(m):
     return ",".join(m.formatters_list)
 

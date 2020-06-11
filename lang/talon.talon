@@ -23,6 +23,12 @@ key:
 	edit.left()
 <user.modifiers> key: "{modifiers}"
 
+key <user.modifiers>+:
+    insert('key(')
+    insert(user.formatted_str(modifiers, "kebab"))
+    insert('-)')
+    edit.left()
+
 action:
 	insert("action():")
 	edit.left()

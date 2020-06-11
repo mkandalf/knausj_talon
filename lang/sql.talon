@@ -1,6 +1,10 @@
 app: DataGrip
+app: /.*/
+and title: /psql/
 
 -
+explain: "EXPLAIN "
+explain analyze: "EXPLAIN ANALYZE "
 select: "SELECT "
 star: "*"
 from: "FROM "

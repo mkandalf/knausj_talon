@@ -78,6 +78,13 @@ action(user.code_state_for_each):
 action(user.code_state_while):
     insert("while :")
     edit.left()
+action(user.code_state_go_to): "go to "
+action(user.code_type_definition): "typedef "	
+action(user.code_typedef_struct):	
+	insert("typedef struct")
+	insert("{{\n\n}}")
+	edit.up()
+	key(tab)
 action(user.code_type_class): "class "
 action(user.code_import): "import "
 action(user.code_from_import):
@@ -100,3 +107,10 @@ action(user.code_state_return):
 dunder in it: insert("__init__")
 state (def | deaf | deft): "def "
 pie test: "pytest"
+
+state in: " in "
+state not in: " not in "
+state return: "return "
+state length:
+	insert("len()")
+	edit.left()

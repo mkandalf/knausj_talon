@@ -38,22 +38,24 @@ extension_lang_map = {
     "go": "go",
     "h": "c",
     "hpp": "cplusplus",
+    "js": "javascript",
     "lua": "lua",
     "md": "markdown",
     "pl": "perl",
     "py": "python",
     "rb": "ruby",
+    "rs": "rust",
     "s": "assembly",
     "sh": "bash",
     "snippets": "snippets",
     "talon": "talon",
-    "vim": "vim",
-    "js": "javascript",
     "ts": "typescript",
+    "vim": "vim",
 }
 
 # flag indicates whether or not the title tracking is enabled
 forced_language = False
+regex_ext = re.compile("[^\\\/]\.(\w*)\s*")
 
 
 @mod.capture(rule="{user.code_functions}")
@@ -81,6 +83,11 @@ class code_actions:
         if not forced_language:
             file_extension = actions.win.file_ext()
             file_name = actions.win.filename()
+            title = actions.win.title()
+            m = regex_ext.search(title)
+            if m:
+                file_extension = m.group(1)
+            print("LANGUAGE", file_name, file_extension, title)
 
             if file_extension != "":
                 result = file_extension

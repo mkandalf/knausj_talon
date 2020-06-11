@@ -34,4 +34,5 @@ suspend:
 resume:
   insert("fg")
   key(enter)
-
+line end: key(ctrl-e)
+line start: key(ctrl-a)

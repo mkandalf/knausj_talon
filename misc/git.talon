@@ -15,6 +15,8 @@ git cherry pick: "git cherry-pick "
 git clone: "git clone "
 git commit message <user.text>: "git commit -m '{text}'"
 git commit: "git commit\n"
+git commit amend: insert("git commit --amend\n")
+git commit amend no edit: insert("git commit --amend --no-edit\n")
 git diff (colour|color) words: "git diff --color-words "
 git diff: "git diff "
 git diff cached: "git diff --cached\n"
@@ -92,3 +94,6 @@ git commit highlighted:
     insert("git add ")
     edit.paste()
     insert("\ngit commit\n")
+# run git <user.git_commands>: insert("git {git_commands}")
+# brew <user.brew_commands>: insert("brew {brew_commands}")
+# terraform <user.terraform_commands>: insert("terraform {terraform_commands}")

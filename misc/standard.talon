@@ -9,6 +9,31 @@ run (S S H | S H): "ssh"
 diff: "diff "
 dot pie: ".py"
 run vim: "vim "
+run tea mux:
+    insert("tmux")
+    key(enter)
+mux kill pane:
+    key(ctrl-a)
+    key(x)
+    key(y)
+mux split right:
+    key(ctrl-a)
+    key(|)
+mux split down:
+    key(ctrl-a)
+    key(dash)
+mux right:
+    key(ctrl-a)
+    key(l)
+mux up:
+    key(ctrl-a)
+    key(k)
+mux down:
+    key(ctrl-a)
+    key(j)
+mux left:
+    key(ctrl-a)
+    key(h)
 run make: "make\n"
 run make (durr | dear): "mkdir "
 (jay son | jason ): "json"

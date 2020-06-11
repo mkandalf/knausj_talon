@@ -117,9 +117,10 @@ elif app.platform == "mac":
     is_mac = True
     ctx.lists["user.file_manager_directory_remap"] = {"": "/Volumes"}
     ctx.lists["user.file_manager_directory_exclusions"] = {}
-    supported_programs = ["com.apple.Terminal", "com.apple.finder"]
+    supported_programs = ["com.apple.Terminal", "com.apple.finder", "com.googlecode.iterm2"]
     terminal_programs = [
         "com.apple.Terminal",
+        "com.googlecode.iterm2"
     ]
 
 elif app.platform == "linux":
@@ -175,23 +176,17 @@ class Actions:
     def file_manager_open_file(path: Union[str, int]):
         """opens the file"""
         if is_windows:
-            # print("file_manager_open_file")
             actions.key("home")
-            if isinstance(path, int):
-                index = (current_file_page - 1) * len(selection_numbers) + path
-                if path < len(file_selections):
-                    actions.insert(file_selections[index])
-            else:
-                actions.insert(path)
+        else:
+            actions.insert("open ")
+        if isinstance(path, int):
+            index = (current_file_page - 1) * len(selection_numbers) + path
+            if(path < len(file_selections)):
+                actions.insert(file_selections[index])
+        else:
+            actions.insert(path)
 
-            actions.key("enter")
-        elif is_mac:
-            actions.key("home")
-            if isinstance(path, int):
-                actions.insert(m[path])
-            else:
-                actions.insert(path)
-            actions.key("cmd-o")
+        actions.key("enter")
 
     def file_manager_select_file(path: Union[str, int]):
         """selects the file"""
@@ -401,7 +396,7 @@ def update_maps(window):
     ):
         return
 
-    title = window.title
+    title = window.title.split(' ')[-1]
     cached_title = title
 
     directories = {}

@@ -10,6 +10,11 @@ channel: key(cmd-k)
 channel <user.text>:
     key(cmd-k)
     insert(user.formatted_text(user.text, "ALL_LOWERCASE"))
+go channel <user.text>$:
+    key(cmd-k)
+    insert(user.formatted_text(user.text, "ALL_LOWERCASE"))
+    sleep(300ms)
+    key(enter)
 ([channel] unread last | gopreev): key(alt-shift-up)
 ([channel] unread next | goneck): key(alt-shift-down)
 (slack | lack) [channel] info: key(cmd-shift-i)
