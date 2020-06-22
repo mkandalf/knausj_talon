@@ -24,6 +24,8 @@ and app.name: RStudio
 apps.apple_terminal = """
 os: mac
 and app.bundle: com.apple.Terminal
+os: mac
+and app.name: iTerm2
 """
 
 apps.iterm2 = """
@@ -77,5 +79,5 @@ and app.exe: powershell.exe
 """
 
 apps.vim = """
-win.title:/VIM/
+win.title:/VIM/i
 """

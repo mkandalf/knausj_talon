@@ -12,6 +12,9 @@ edit = actions.edit
 words_to_keep_lowercase = (
     "a an the at by for in is of on to up and as but or nor".split()
 )
+words_to_all_caps = "api".split(
+    ","
+)
 
 # The last phrase spoken, without & with formatting. Used for reformatting.
 last_phrase = ""
@@ -127,7 +130,7 @@ formatters_dict = {
     "CAPITALIZE_FIRST_WORD": (SEP, first_vs_rest(lambda w: w.capitalize())),
     "CAPITALIZE_ALL_WORDS": (
         SEP,
-        lambda i, word, _: word.capitalize()
+        lambda i, word, _: (word.capitalize() if word not in words_to_all_caps else word.upper())
         if i == 0 or word not in words_to_keep_lowercase
         else word,
     ),
@@ -145,6 +148,7 @@ formatters_words = {
     "kebab": formatters_dict["DASH_SEPARATED"],
     "packed": formatters_dict["DOUBLE_COLON_SEPARATED"],
     "padded": formatters_dict["SPACE_SURROUNDED_STRING"],
+    "package": [formatters_dict["DOUBLE_COLON_SEPARATED"], formatters_dict["CAPITALIZE_ALL_WORDS"]],
     "slasher": formatters_dict["SLASH_SEPARATED"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],

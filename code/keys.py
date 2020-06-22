@@ -161,6 +161,7 @@ symbol_key_words = {
     "square": "[",
     "R square": "]",
     "right square": "]",
+    "close square": "]",
     "slash": "/",
     "backslash": "\\",
     "minus": "-",
@@ -176,15 +177,19 @@ symbol_key_words = {
     "left paren": "(",
     "R paren": ")",
     "right paren": ")",
+    "close paren": ")",
+    "rub": ")",
     "brace": "{",
     "left brace": "{",
     "R brace": "}",
+    "close brace": "}",
     "right brace": "}",
     "angle": "<",
     "left angle": "<",
     "less than": "<",
     "rangle": ">",
     "R angle": ">",
+    "close angle": ">",
     "right angle": ">",
     "greater than": ">",
     "star": "*",
@@ -225,11 +230,10 @@ simple_keys = [
 ]
 
 alternate_keys = {
-    "delete": "backspace",
     "forward delete": "delete",
-    #'junk': 'backspace',
     "page up": "pageup",
     "page down": "pagedown",
+    "junk": "backspace",
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
