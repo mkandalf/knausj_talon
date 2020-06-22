@@ -58,7 +58,6 @@ extension_lang_map = {
     ".tsx": "typescript",
     ".vba": "vba",
     ".vim": "vimscript",
-    ".vimrc": "vimscript",
 }
 
 # flag indicates whether or not the title tracking is enabled

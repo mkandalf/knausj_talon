@@ -24,7 +24,12 @@ mod.list("launch", desc="all launchable applications")
 ctx = Context()
 
 # a list of the current overrides
-overrides = {}
+overrides = {
+    "term": "iTerm2",
+    "terminal": "iTerm2",
+    "chrome": "Chrome",
+    "slack": "Slack",
+}
 
 # a list of the currently running application names
 running_application_dict = {}

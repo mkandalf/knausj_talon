@@ -1,4 +1,4 @@
-find it:
+search it:
     edit.find()
 
 next one:
