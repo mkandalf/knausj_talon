@@ -292,7 +292,7 @@ def gui_folders(gui: imgui.GUI):
         len(ctx.lists["self.file_manager_directories"]) / setting_imgui_limit.get()
     )
     gui.text(
-        "Select a directory ({}/{})".format(current_folder_page, total_folder_pages)
+        "Follow a directory ({}/{})".format(current_folder_page, total_folder_pages)
     )
     gui.line()
 
@@ -331,7 +331,7 @@ def gui_files(gui: imgui.GUI):
     global file_selections, current_file_page, total_file_pages
     total_file_pages = math.ceil(len(file_selections) / setting_imgui_limit.get())
 
-    gui.text("Select a file ({}/{})".format(current_file_page, total_file_pages))
+    gui.text("Open a file ({}/{})".format(current_file_page, total_file_pages))
     gui.line()
     index = 1
     current_index = (current_file_page - 1) * setting_imgui_limit.get()

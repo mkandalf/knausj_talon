@@ -175,6 +175,7 @@ abbreviations = {
     "session id": "sid",
     "shell": "sh",
     "shellcode": "sc",
+    "signature": "sig",
     "source": "src",
     "special": "spec",
     "specific": "spec",

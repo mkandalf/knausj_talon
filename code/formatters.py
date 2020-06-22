@@ -11,6 +11,9 @@ edit = actions.edit
 words_to_keep_lowercase = "a,an,the,at,by,for,in,is,of,on,to,up,and,as,but,or,nor".split(
     ","
 )
+words_to_all_caps = "api".split(
+    ","
+)
 
 # The last phrase spoken, without & with formatting. Used for reformatting.
 last_phrase = ""
@@ -56,9 +59,13 @@ def format_phrase_no_history(word_list, fmtrs: str):
     spaces = True
     for i, w in enumerate(word_list):
         for name in reversed(fmtr_list):
-            smash, func = all_formatters[name]
-            w = func(i, w, i == len(word_list) - 1)
-            spaces = spaces and not smash
+            formatters = all_formatters[name]
+            if not isinstance(formatters, list):
+                formatters = [formatters,]
+            for formatter in reversed(formatters):
+                smash, func = formatter
+                w = func(i, w, i == len(word_list) - 1)
+                spaces = spaces and not smash
         words.append(w)
     sep = " " if spaces else ""
     return sep.join(words)
@@ -134,7 +141,7 @@ formatters_dict = {
     "CAPITALIZE_FIRST_WORD": (SEP, first_vs_rest(lambda w: w.capitalize())),
     "CAPITALIZE_ALL_WORDS": (
         SEP,
-        lambda i, word, _: word.capitalize()
+        lambda i, word, _: (word.capitalize() if word not in words_to_all_caps else word.upper())
         if i == 0 or word not in words_to_keep_lowercase
         else word,
     ),
@@ -155,6 +162,7 @@ formatters_words = {
     "kebab": formatters_dict["DASH_SEPARATED"],
     "packed": formatters_dict["DOUBLE_COLON_SEPARATED"],
     "padded": formatters_dict["SPACE_SURROUNDED_STRING"],
+    "package": [formatters_dict["DOUBLE_COLON_SEPARATED"], formatters_dict["CAPITALIZE_ALL_WORDS"]],
     "slasher": formatters_dict["SLASH_SEPARATED"],
     "smash": formatters_dict["NO_SPACES"],
     "snake": formatters_dict["SNAKE_CASE"],

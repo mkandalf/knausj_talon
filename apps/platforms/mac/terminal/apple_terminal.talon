@@ -15,9 +15,33 @@ tag(): user.kubectl
 # TODO: explain
 tag(): user.tabs
 tag(): user.file_manager
+tag(): user.tmux
 
 suspend:
     key(ctrl-z)
 resume:
     insert("fg")
     key(enter)
+
+run vim: "vim\n"
+run tea mux:
+    insert("tmux")
+    key(enter)
+grep: "grep "
+git grep: "git grep "
+ls: "ls\n"
+clear way left:
+    key(ctrl-u)
+
+clear way right:
+    key(ctrl-k)
+
+clear word left:
+    key(ctrl-w)
+
+clear word right:
+    key(ctrl-k)
+
+go way left:
+    key(ctrl-a)
+    key(a)

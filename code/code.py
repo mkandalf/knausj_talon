@@ -34,7 +34,6 @@ extension_lang_map = {
     ".tsx": "typescript",
     ".vba": "vba",
     ".vim": "vimscript",
-    ".vimrc": "vimscript",
 }
 
 @ctx.action_class("code")

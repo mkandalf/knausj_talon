@@ -46,11 +46,12 @@ _capitalize_defaults = [
     "December",
 ]
 
-# Default words that need to be remapped.
+# Add single words here if Talon recognizes them, but they need to have their
+# spelling adjusted.
 _word_map_defaults = {
-    # E.g:
-    # "cash": "cache",
-    # This is the opposite ordering to words_to_replace.csv (the latter has the target word first)
+    "pain": "pane",
+    "knowable": "nilable",
+    "a sync": "async",
 }
 _word_map_defaults.update({word.lower(): word for word in _capitalize_defaults})
 
@@ -75,6 +76,14 @@ _simple_vocab_default = ["nmap", "admin", "Cisco", "Citrix", "VPN", "DNS", "Mine
 _default_vocabulary = {
     "N map": "nmap",
     "under documented": "under-documented",
+    "nick em": "nickm",
+    "usman": "Usman",
+    "usemon": "Usman",
+    "jessica": "Jessica",
+    "jay": "Jae",
+    "robert": "Robert",
+    "millable": "nilable",
+    "apia": "api",
 }
 _default_vocabulary.update({word: word for word in _simple_vocab_default})
 
