@@ -249,6 +249,10 @@ def letters(m):
 
 @mod.action_class
 class Actions:
+    def keys_letters(m: list):
+        """Inserts uppercase letters from list"""
+        actions.insert("".join(m))
+
     def keys_uppercase_letters(m: list):
         """Inserts uppercase letters from list"""
         actions.insert("".join(m).upper())

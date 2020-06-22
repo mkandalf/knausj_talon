@@ -16,6 +16,7 @@ mapping_vocabulary = {
     "i've": "I've",
     "i'll": "I'll",
     "i'd": "I'd",
+    "pain": "pane",
 }
 
 mapping_vocabulary.update(dict(zip(simple_vocabulary, simple_vocabulary)))
@@ -47,6 +48,7 @@ def text(m) -> str:
     i = 0
     while i < len(words):
         words[i] = remove_dragon_junk(words[i])
+        words[i] = mapping_vocabulary.get(words[i], words[i])
         i += 1
 
     return " ".join(words)
