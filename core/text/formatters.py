@@ -12,6 +12,9 @@ edit = actions.edit
 words_to_keep_lowercase = (
     "a an and as at but by en for if in nor of on or per the to v via vs".split()
 )
+words_to_all_caps = "api".split(
+    ","
+)
 
 # The last phrase spoken, without & with formatting. Used for reformatting.
 last_phrase = ""
@@ -55,7 +58,7 @@ def format_phrase(m: Union[str, Phrase], formatters: str):
 def format_phrase_without_adding_to_history(word_list, formatters: str):
     # A formatter is a pair (keep_spaces, function). We drop spaces if any
     # formatter does; we apply their functions in reverse order.
-    formatters = [all_formatters[name] for name in formatters.split(",")]
+    formatters = [formatters_dict[formatter] for name in formatters.split(",") for formatter in all_formatters[name].split(",")]
     separator = " " if all(x[0] for x in formatters) else ""
     functions = [x[1] for x in reversed(formatters)]
     words = []
@@ -111,6 +114,8 @@ def title_case():
                     for j, component in enumerate(components)
                 ]
                 word = "-".join(components)
+            elif word in words_to_all_caps:
+                word = word.upper()
             elif word_start := re.match(r"\W*", word).end():
                 # word begins with non-alphanumeric characters
                 word = word[:word_start] + word[word_start:].capitalize()
@@ -179,6 +184,7 @@ code_formatter_names = {
     "hammer": "PUBLIC_CAMEL_CASE",
     "kebab": "DASH_SEPARATED",
     "packed": "DOUBLE_COLON_SEPARATED",
+    "package": "DOUBLE_COLON_SEPARATED,CAPITALIZE_ALL_WORDS",
     "padded": "SPACE_SURROUNDED_STRING",
     "slasher": "SLASH_SEPARATED",
     "smash": "NO_SPACES",
@@ -191,9 +197,10 @@ prose_formatter_names = {
     "sentence": "CAPITALIZE_FIRST_WORD",
     "title": "CAPITALIZE_ALL_WORDS",
 }
+
 # Mapping from spoken phrases to formatters
 formatter_words = {
-    phrase: formatters_dict[name]
+    phrase: name
     for phrase, name in (code_formatter_names | prose_formatter_names).items()
 }
 
@@ -201,7 +208,7 @@ formatter_words = {
 all_prose_formatters = [
     item for sublist in prose_formatter_names.items() for item in sublist
 ]
-all_formatters = formatters_dict | formatter_words
+all_formatters = {name: name for name in formatters_dict.keys()} | formatter_words
 
 mod = Module()
 mod.list("formatters", desc="list of all formatters (code and prose)")

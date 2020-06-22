@@ -4,7 +4,7 @@ zoom out: edit.zoom_out()
 zoom reset: edit.zoom_reset()
 
 # Searching
-find it: edit.find()
+search it: edit.find()
 next one: edit.find_next()
 
 # Navigation
