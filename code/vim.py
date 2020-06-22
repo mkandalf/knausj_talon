@@ -135,8 +135,8 @@ standard_counted_actions = {
     "indent line": ">>",
     "unindent line": "<<",
     "delete line": "dd",
-    "yank line": "Y",
-    # "copy line": "Y",
+    # "yank line": "Y",
+    "copy line": "Y",
     "scroll left": "zh",
     "scroll right": "zl",
     "scroll half screen left": "zH",
@@ -207,7 +207,7 @@ commands_with_motion = {
     "unindent": "<",
     "an indent": "<",
     "un indent": "<",
-    "yank": "y",  # XXX - conflicts with talon 'yank' alphabet for 'y' key
+    # "yank": "y",  # XXX - conflicts with talon 'yank' alphabet for 'y' key
     # NOTE: If you enable this and yank at the same time, some convenience
     # commands you might setup for automatic copying might get swallowed by
     # vim.py grammars
@@ -226,7 +226,7 @@ visual_commands = {
     "change": "c",
     "join": "J",
     "delete": "d",
-    "yank": "y",  # XXX - conflicts with talon 'yank' alphabet for 'y' key
+    # "yank": "y",  # XXX - conflicts with talon 'yank' alphabet for 'y' key
     "copy": "y",
     "format": "gq",
     "fold": "zf",
@@ -254,7 +254,7 @@ ctx.lists["self.vim_motions"] = {
     "big back": "B",
     "big back word": "B",
     # XXX - this conflicts with default talon 'end' key pressing
-    "end": "e",
+    # "end": "e",
     "end word": "e",
     "big end": "E",
     "word": "w",

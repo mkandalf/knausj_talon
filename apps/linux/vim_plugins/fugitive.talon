@@ -4,6 +4,7 @@ tag: vim
 # XXX - technically these are using the old fugitive commands
 (fugitive|git) status: user.vim_normal_mode(":Gstatus\n")
 (fugitive|git) diff: user.vim_normal_mode(":Gdiff\n")
+(fugitive|git) browse: user.vim_normal_mode(":Gbrowse\n")
 (fugitive|git) diff staged: user.vim_normal_mode(":Git! diff --staged\n")
 (fugitive|git) (delete|remove): user.vim_normal_mode(":Gdelete")
 (fugitive|git) split diff: user.vim_normal_mode(":Gsplitdiff!")

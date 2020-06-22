@@ -24,7 +24,7 @@
 #     `yank next X lines` (relative forward copy)
 # - Move ':' stuff to use command mode funcs
 
-os:linux
+os:mac
 app:gvim
 app:/term/
 and win.title:/VIM/
@@ -298,8 +298,8 @@ delete (line|lines) [at|number] <number> through <number>$: user.vim_normal_mode
 clear line: key(ctrl-u)
 
 # copying
-(copy|yank) line (at|number) <number>$: user.vim_normal_mode_exterm(":{number}y\n")
-(copy|yank) line (at|number) <number> through <number>: user.vim_normal_mode_exterm(":{number_1},{number_2}y\n")
+copy line (at|number) <number>$: user.vim_normal_mode_exterm(":{number}y\n")
+copy line (at|number) <number> through <number>: user.vim_normal_mode_exterm(":{number_1},{number_2}y\n")
 
 # duplicating
 # XXX - these don't preserve INSERT atm because they use multiple commands
@@ -659,7 +659,7 @@ modify [register|macro] <user.letter>:
 
 # XXX - these could be valid in normal or visual
 paste from register <user.any>: insert('"{any}p')
-yank to register <user.any>: insert('"{any}y')
+copy to register <user.any>: insert('"{any}y')
 
 ###
 # Informational
