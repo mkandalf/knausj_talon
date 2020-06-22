@@ -252,6 +252,7 @@ code_formatter_names = {
     "hammer": "PUBLIC_CAMEL_CASE",
     "kebab": "DASH_SEPARATED",
     "packed": "DOUBLE_COLON_SEPARATED",
+    "package": "DOUBLE_COLON_SEPARATED,CAPITALIZE_ALL_WORDS",
     "padded": "SPACE_SURROUNDED_STRING",
     "slasher": "ALL_SLASHES",
     "conga": "SLASH_SEPARATED",

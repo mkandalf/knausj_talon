@@ -366,6 +366,7 @@ abbreviations = {
     "shell": "sh",
     "shellcode": "sc",
     "signal": "sig",
+    "signature": "sig",
     "size": "sz",
     "snipped": "[...]",
     "some": "sum",

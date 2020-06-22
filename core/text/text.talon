@@ -34,3 +34,7 @@ nope that was <user.formatters>: user.formatters_reformat_last(formatters)
 (abbreviate | abreviate | brief) {user.abbreviation}: "{abbreviation}"
 <user.formatters> (abbreviate | abreviate | brief) {user.abbreviation}:
     user.insert_formatted(abbreviation, formatters)
+sing <user.word>: user.insert_formatted(user.word, "NOOP")
+capital <user.word>: 
+  result = user.formatted_text(word, "CAPITALIZE_ALL_WORDS")
+  insert(result)
