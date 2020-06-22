@@ -64,5 +64,8 @@ main
 master
 origin
 upstream
-origin/main,origin main
-origin/master,origin master
+origin/main,origin slash main
+origin/master,origin slash master
+origin/master-passing-tests,origin slash master-passing-tests
+origin/master,origin slash master
+master-passing-tests,master passing tests

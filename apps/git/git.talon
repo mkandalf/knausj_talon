@@ -49,3 +49,12 @@ git commit highlighted:
     insert("git add ")
     edit.paste()
     insert("\ngit commit\n")
+
+# Custom
+git checkout <user.text>:
+  insert("git checkout ")
+  insert(user.formatted_text(user.text, "DASH_SEPARATED"))
+git new branch: "git checkout -b nickm-"
+git fetch remote <user.text>:
+    branch = user.formatted_text(user.text, "DASH_SEPARATED")
+    "git fetch origin {branch}:{branch}"

@@ -168,6 +168,8 @@ punctuation_words = {
     "left paren": "(",
     "R paren": ")",
     "right paren": ")",
+    "close paren": ")",
+    "rub": ")",
 }
 symbol_key_words = {
     "dot": ".",
@@ -180,6 +182,7 @@ symbol_key_words = {
     "square": "[",
     "R square": "]",
     "right square": "]",
+    "close square": "]",
     "slash": "/",
     "backslash": "\\",
     "minus": "-",
@@ -192,12 +195,13 @@ symbol_key_words = {
     "down score": "_",
     "underscore": "_",
     "paren": "(",
-    "brace": "{",
-    "left brace": "{",
     "brack": "{",
     "bracket": "{",
     "left bracket": "{",
-    "r brace": "}",
+    "brace": "{",
+    "left brace": "{",
+    "R brace": "}",
+    "close brace": "}",
     "right brace": "}",
     "r brack": "}",
     "r bracket": "}",
@@ -207,6 +211,7 @@ symbol_key_words = {
     "less than": "<",
     "rangle": ">",
     "R angle": ">",
+    "close angle": ">",
     "right angle": ">",
     "greater than": ">",
     "star": "*",
@@ -249,10 +254,10 @@ simple_keys = [
 alternate_keys = {
     "wipe": "backspace",
     "delete": "backspace",
-    #'junk': 'backspace',
     "forward delete": "delete",
     "page up": "pageup",
     "page down": "pagedown",
+    "junk": "backspace",
 }
 # mac apparently doesn't have the menu key.
 if app.platform in ("windows", "linux"):
