@@ -3,6 +3,7 @@ app: Terminal
 app: iTerm2
 app: com.apple.Terminal
 -
+tag(): tabs
 tag(): terminal
 tag(): file_manager
 action(user.file_manager_open_parent):
