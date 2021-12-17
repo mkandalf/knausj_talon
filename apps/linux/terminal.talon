@@ -9,9 +9,9 @@ action(edit.page_down):
 action(edit.page_up):
   key(shift-pageup)
 action(edit.paste):
-  key(ctrl-shift-v)
+  key(cmd-v)
 action(edit.copy):
-  key(ctrl-shift-c)
+  key(cmd-c)
 
 run last:
   key(up)
