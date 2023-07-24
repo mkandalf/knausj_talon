@@ -284,3 +284,24 @@ go camel right: user.camel_right()
 
 # requires plug-in: black-pycharm
 blacken: user.idea("action BLACKReformatCode")
+
+easy down: 
+  ','
+  ','
+  'j'
+easy up: 
+  ','
+  ','
+  'k'
+easy word: 
+  ','
+  ','
+  'w'
+easy find: 
+  ','
+  ','
+  'f'
+easy reverse find: 
+  ','
+  ','
+  'F'
