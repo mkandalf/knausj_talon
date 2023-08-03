@@ -138,7 +138,7 @@ class WinActions:
         #    title = ui.active_window().doc
 
         if is_mac:
-            result = title.split(" — ")[0]
+            result = title.split(" — ")[-1]
         else:
             result = title.split(" - ")[0]
 
