@@ -31,6 +31,8 @@ overrides = {
     "terminal": "iTerm2",
     "chrome": "Chrome",
     "slack": "Slack",
+    "code": "VSCode",
+    "jet": "IntelliJ",
 }
 
 # apps to exclude from running list
