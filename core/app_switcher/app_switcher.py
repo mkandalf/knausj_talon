@@ -26,6 +26,8 @@ overrides = {
     "terminal": "iTerm2",
     "chrome": "Chrome",
     "slack": "Slack",
+    "code": "VSCode",
+    "jet": "IntelliJ",
 }
 
 # a list of the currently running application names
