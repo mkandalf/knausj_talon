@@ -67,6 +67,9 @@ formatted <user.format_text>: user.dictation_insert_raw(format_text)
 nope that | scratch that: user.clear_last_phrase()
 (nope | scratch) selection: edit.delete()
 select that: user.select_last_phrase()
+acronym <user.letters>:
+    result = user.formatted_text(letters, "ALL_CAPS")
+    user.dictation_insert_raw(result)
 spell that <user.letters>: user.dictation_insert(letters)
 spell that <user.formatters> <user.letters>:
     result = user.formatted_text(letters, formatters)
