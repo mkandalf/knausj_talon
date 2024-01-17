@@ -1,9 +1,10 @@
 import itertools
 import math
 import re
+import subprocess
 from collections import defaultdict
 from itertools import islice
-from typing import Iterable
+from typing import Iterable, Any
 
 from talon import Context, Module, actions, imgui, registry, settings
 
@@ -52,6 +53,7 @@ show_enabled_contexts_only = False
 selected_list = None
 current_list_page = 1
 
+file_indexes = None
 
 def update_title():
     global live_update
@@ -81,9 +83,10 @@ def gui_formatters(gui: imgui.GUI):
         gui_formatters.hide()
 
 
-def format_context_title(context_name: str) -> str:
+def format_context_title(context_name: str, index: int) -> str:
     global cached_active_contexts_list
-    return "{} [{}]".format(
+    return "({:<2d}) {} [{}]".format(
+        index,
         context_name,
         (
             "ACTIVE"
@@ -133,9 +136,9 @@ def get_current_context_page_length() -> int:
     )
 
 
-def get_command_line_count(command: tuple[str, str]) -> int:
+def get_command_line_count(command: Any) -> int:
     """This should be kept in sync with draw_commands"""
-    _, body = command
+    body = command.target.code
     lines = len(body.split("\n"))
     if lines == 1:
         return 1
@@ -258,11 +261,12 @@ def draw_context_commands(gui: imgui.GUI):
     global selected_context
     global total_page_count
     global selected_context_page
+    global file_indexes
 
-    context_title = format_context_title(selected_context)
+    context_title = format_context_title(selected_context, 0)
     title = f"Context: {context_title}"
     commands = context_command_map[selected_context].items()
-    item_line_counts = [get_command_line_count(command) for command in commands]
+    item_line_counts = [get_command_line_count(command) for _, command in commands]
     pages = get_pages(item_line_counts)
     total_page_count = max(pages, default=1)
     draw_commands_title(gui, title)
@@ -273,7 +277,11 @@ def draw_context_commands(gui: imgui.GUI):
         if page == selected_context_page
     ]
 
-    draw_commands(gui, filtered_commands)
+    file_indexes = [(command.target.filename, command.target.start_line) for _, command in filtered_commands]
+    if filtered_commands:
+        _, command = filtered_commands[0]
+        file_indexes.insert(0, (command.target.filename, 0))
+    draw_commands(gui, filtered_commands, 1)
 
 
 def draw_search_commands(gui: imgui.GUI):
@@ -281,6 +289,7 @@ def draw_search_commands(gui: imgui.GUI):
     global total_page_count
     global cached_active_contexts_list
     global selected_context_page
+    global file_indexes
 
     title = f"Search: {search_phrase}"
     commands_grouped = get_search_commands(search_phrase)
@@ -293,7 +302,7 @@ def draw_search_commands(gui: imgui.GUI):
 
     pages = get_pages(
         [
-            sum(get_command_line_count(command) for command in commands) + 3
+            sum(get_command_line_count(command) for _, command in commands) + 3
             for _, commands in sorted_commands_grouped
         ]
     )
@@ -302,11 +311,16 @@ def draw_search_commands(gui: imgui.GUI):
     draw_commands_title(gui, title)
 
     current_item_index = 1
+    file_indexes = []
     for (context, commands), page in zip(sorted_commands_grouped, pages):
         if page == selected_context_page:
-            gui.text(format_context_title(context))
+            gui.text(format_context_title(context, current_item_index))
+            _, command = commands[0]
+            file_indexes.append((command.target.filename, 0))
+            current_item_index += 1
             gui.line()
-            draw_commands(gui, commands)
+            current_item_index = draw_commands(gui, commands, current_item_index)
+            file_indexes.extend((command.target.filename, command.target.start_line) for _, command in commands)
             gui.spacer()
 
 
@@ -334,15 +348,17 @@ def draw_commands_title(gui: imgui.GUI, title: str):
     gui.line()
 
 
-def draw_commands(gui: imgui.GUI, commands: Iterable[tuple[str, str]]):
+def draw_commands(gui: imgui.GUI, commands: Iterable[tuple[str, Any]], index: int):
     for key, val in commands:
-        val = val.split("\n")
+        val = val.target.code.split("\n")
         if len(val) > 1:
-            gui.text(f"{key}:")
+            gui.text(f"({index}) {key}:")
             for line in val:
                 gui.text(f"    {line}")
         else:
-            gui.text(f"{key}: {val[0]}")
+            gui.text(f"({index:<2d}) {key}: {val[0]}")
+        index += 1
+    return index
 
 
 def reset():
@@ -355,6 +371,7 @@ def reset():
     global display_name_to_context_name_map
     global selected_list
     global current_list_page
+    global file_indexes
 
     current_context_page = 1
     sorted_display_list = []
@@ -365,6 +382,7 @@ def reset():
     display_name_to_context_name_map = {}
     selected_list = None
     current_list_page = 1
+    file_indexes = None
 
 
 def update_active_contexts_cache(active_contexts):
@@ -387,6 +405,9 @@ def refresh_context_command_map(enabled_only=False):
     cached_short_context_names = {}
 
     for context_name, context in registry.contexts.items():
+        #  print(dir(context))
+        #  print(context_name)
+        #  print(context.path)
         splits = context_name.split(".")
 
         if "talon" == splits[-1]:
@@ -408,7 +429,7 @@ def refresh_context_command_map(enabled_only=False):
                     if command_alias in registry.commands or not enabled_only:
                         local_context_command_map[context_name][
                             str(val.rule.rule)
-                        ] = val.target.code
+                        ] = val
                 if len(local_context_command_map[context_name]) == 0:
                     local_context_command_map.pop(context_name)
                 else:
@@ -630,6 +651,18 @@ class Actions:
                 current_list_page += 1
             else:
                 current_list_page = 1
+
+    def help_edit_index(index: int):
+        """Select the context by a number"""
+        global sorted_display_list, selected_context, file_indexes
+        if gui_context_help.showing:
+            print("HERE", file_indexes)
+            if file_indexes and index < len(file_indexes) and index >= 0:
+                file_name, line_number = file_indexes[index]
+                Actions.help_hide()
+                # open in VSCode
+                command = ["/usr/local/bin/code", "-g", f"{file_name}:{line_number}"]
+                subprocess.run(command)
 
     def help_select_index(index: int):
         """Select the context by a number"""
