@@ -134,7 +134,7 @@ class EditActions:
         actions.user.vscode("workbench.action.zoomReset")
 
 
-@ctx.action_class("win")
+@ctx.action_class
 class WinActions:
     def filename():
         title = actions.win.title()
