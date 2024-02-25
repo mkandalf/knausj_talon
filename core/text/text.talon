@@ -26,6 +26,6 @@ before that: user.before_last_phrase()
 nope that | scratch that: user.clear_last_phrase()
 nope that was <user.formatters>: user.formatters_reformat_last(formatters)
 sing <user.word>: user.insert_formatted(user.word, "NOOP")
-capital <user.word>: 
+capital <user.word>:
   result = user.formatted_text(word, "CAPITALIZE_ALL_WORDS")
   insert(result)

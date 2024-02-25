@@ -69,6 +69,7 @@ settings():
 
     key_wait = 6.0
     speech.record_all = 1
+    speech.timeout = 0.5
 
 # Uncomment to enable the curse yes/curse no commands (show/hide mouse cursor).
 # See issue #688 for more detail: https://github.com/talonhub/community/issues/688
