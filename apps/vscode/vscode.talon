@@ -25,7 +25,7 @@ bar explore: user.vscode("workbench.view.explorer")
 bar extensions: user.vscode("workbench.view.extensions")
 bar outline: user.vscode("outline.focus")
 bar run: user.vscode("workbench.view.debug")
-bar search: user.vscode("workbench.view.search")
+bar search: user.vscode("workbench.action.findInFiles")
 bar source: user.vscode("workbench.view.scm")
 bar test: user.vscode("workbench.view.testing.focus")
 bar switch: user.vscode("workbench.action.toggleSidebarVisibility")
@@ -292,3 +292,26 @@ cell run: user.vscode("notebook.cell.execute")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
+
+# custom
+search next: user.vscode("search.action.focusNextSearchResult")
+search (previous | last): user.vscode("search.action.focusPreviousSearchResult")
+search clear: user.vscode("search.action.clearSearchResults")
+search editor: user.vscode("search.action.openInEditor")
+
+# andreas tabs
+tabby {self.letter} [{self.letter}]:
+    user.run_rpc_command("andreas.focusTab", "{letter_1}{letter_2 or ''}")
+
+(buff | tab) (open | hunt | search):
+    user.vscode("workbench.action.showAllEditorsByMostRecentlyUsed")
+    key(down)
+
+file hunt recent:
+    user.vscode("workbench.action.showAllEditorsByMostRecentlyUsed")
+
+group (search | hunt):
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+
+group (tab | buff) (switch | swap): key(ctrl-tab)
+(tab | buff) (switch | swap): key(ctrl-alt-cmd-tab)

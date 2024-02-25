@@ -57,3 +57,5 @@ talon dump context:
 
 talon (bug report | report bug):
     user.open_url("https://github.com/talonhub/community/issues")
+
+^talon edit <phrase>$: user.talon_edit_phrase(phrase)

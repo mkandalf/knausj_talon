@@ -719,13 +719,10 @@ class Actions:
         """Select the context by a number"""
         global sorted_display_list, selected_context, file_indexes
         if gui_context_help.showing:
-            print("HERE", file_indexes)
             if file_indexes and index < len(file_indexes) and index >= 0:
                 file_name, line_number = file_indexes[index]
-                Actions.help_hide()
-                # open in VSCode
-                command = ["/usr/local/bin/code", "-g", f"{file_name}:{line_number}"]
-                subprocess.run(command)
+                actions.user.help_hide()
+                actions.user.talon_edit_file_at(file_name, line_number)
 
     def help_select_index(index: int):
         """Select the context by a number"""
