@@ -78,7 +78,6 @@ class Actions:
         variable = snippet.get_variable_strict(variable_name)
         return WrapperSnippet(snippet.body, variable.name, variable.wrapper_scope)
 
-
 def update_snippets():
     language_to_snippets = group_by_language(get_snippets())
 

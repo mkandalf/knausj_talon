@@ -80,3 +80,8 @@ spell that <user.formatters> <user.letters>:
 spell <user.letters>:
     result = user.keys_letters(letters)
     user.dictate(result)
+
+(mark down | markdown) one: "# "
+(mark down | markdown) two: "## "
+(mark down | markdown) three: "### "
+(mark down | markdown) four: "#### "

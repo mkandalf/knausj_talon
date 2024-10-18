@@ -285,10 +285,14 @@ select word: user.vscode("editor.action.addSelectionToNextFindMatch")
 skip word: user.vscode("editor.action.moveSelectionToNextFindMatch")
 
 # jupyter
+cell edit: user.vscode("notebook.cell.edit")
 cell next: user.vscode("notebook.focusNextEditor")
 cell last: user.vscode("notebook.focusPreviousEditor")
 cell run above: user.vscode("notebook.cell.executeCellsAbove")
 cell run: user.vscode("notebook.cell.execute")
+cell delete: user.vscode("notebook.cell.delete")
+drink cell: user.vscode("notebook.cell.insertCodeCellAbove")
+pour cell: user.vscode("notebook.cell.insertCodeCellBelow")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
