@@ -31,3 +31,14 @@ $1.insertionFormatter: SNAKE_CASE
 def $1($2):
     $0
 ---
+
+language: ruby
+
+$1.insertionFormatter: SNAKE_CASE
+$2.insertionFormatter: SNAKE_CASE
+-
+sig { params($2: $3).returns($4) }
+def $1($2)
+    $0
+end
+---

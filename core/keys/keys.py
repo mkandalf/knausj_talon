@@ -172,6 +172,7 @@ punctuation_words = {
     "rub": ")",
 }
 symbol_key_words = {
+    "space": " ",
     "dot": ".",
     "point": ".",
     "quote": "'",

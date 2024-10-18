@@ -4,7 +4,7 @@ insertionScope: statement
 
 $1.wrapperPhrase: if cond
 $1.wrapperScope: statement
-$0.wrapperPhrase: if
+$0.wrapperPhrase: iff
 $0.wrapperScope: statement
 ---
 
@@ -19,4 +19,11 @@ language: python
 -
 if $1:
     $0
+---
+
+language: ruby
+-
+if $1
+    $0
+end
 ---
