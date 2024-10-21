@@ -319,3 +319,5 @@ group (search | hunt):
 
 group (tab | buff) (switch | swap): key(ctrl-tab)
 (tab | buff) (switch | swap): key(ctrl-alt-cmd-tab)
+
+python run: user.vscode("python.execInTerminal")

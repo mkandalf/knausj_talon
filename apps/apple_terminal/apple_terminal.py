@@ -7,6 +7,7 @@ from talon import Context, actions, ui
 ctx = Context()
 ctx.matches = r"""
 app: apple_terminal
+app: iterm2
 """
 directories_to_remap = {}
 directories_to_exclude = {}
@@ -26,6 +27,8 @@ class UserActions:
         # take the first split for the zsh-based terminal
         if " — " in title:
             title = title.split(" — ")[0]
+        elif ":" in title:
+            title = title.split(":")[-1]
 
         if "~" in title:
             title = os.path.expanduser(title)

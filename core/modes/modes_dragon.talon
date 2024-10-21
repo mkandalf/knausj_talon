@@ -23,3 +23,5 @@ speech.engine: dragon
     user.mouse_sleep()
     speech.disable()
     user.dragon_engine_sleep()
+
+^(talon sleep | drowse) [<phrase>]$: speech.disable()
